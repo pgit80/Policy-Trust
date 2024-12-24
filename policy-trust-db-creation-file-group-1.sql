@@ -2,15 +2,22 @@
 CREATE DATABASE policy_trust;
 USE policy_trust;
 
+-- User Table: for login purposes
+CREATE TABLE Users (
+    Username VARCHAR(50),
+    Password VARCHAR(50),
+    User_Role VARCHAR(10) CHECK (User_Role in ('Customer', 'Admin')) DEFAULT 'Customer'
+);
+
 -- Admin Table
-CREATE TABLE Admin (
+CREATE TABLE Admins (
     AdminID INT PRIMARY KEY,
     Name VARCHAR(100),
     Email VARCHAR(100)
 );
 
 -- Customer Table
-CREATE TABLE Customer (
+CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
     Name VARCHAR(100),
     Email VARCHAR(100),
@@ -32,7 +39,7 @@ CREATE TABLE Schemes (
 );
 
 -- Policy Table
-CREATE TABLE Policy (
+CREATE TABLE Policies (
     PolicyID INT PRIMARY KEY,
     Amount DECIMAL(10, 2),
     Premium DECIMAL(10, 2),
@@ -43,7 +50,7 @@ CREATE TABLE Policy (
 );
 
 -- Claim Table
-CREATE TABLE Claim (
+CREATE TABLE Claims (
     ClaimID INT PRIMARY KEY,
     ClaimDate DATE,
     Description TEXT,
